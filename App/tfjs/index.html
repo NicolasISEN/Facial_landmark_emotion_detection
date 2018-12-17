@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Title</title>
+	<meta charset="utf-8">
+</head>
+<body>
+	<h1>TensorFlow JS</h1>
+	<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs/dist/tf.min.js"> </script> 
+    <script src="/socket.io/socket.io.js"></script>
+ 	<video id="videoInput" width="320" height="240"></video>
+ 	<canvas id="canvasOutput" width="320" height="240"></canvas>
+    <a id="downloadAnchorElem" style="">Download</a>
+	<script type="text/javascript">
+        var socket = io.connect('http://localhost:8080');
+		
+
+
+		var storageObj = new Object();
+		storageObj["first"]="premier";
+		storageObj["second"]="deuxieme";
+
+		
+		var dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(storageObj));
+		var dlAnchorElem = document.getElementById('downloadAnchorElem');
+		dlAnchorElem.setAttribute("href",     dataStr     );
+		dlAnchorElem.setAttribute("download", "scene.json");
+
+		var func2 = function(){
+			console.log("Coucou",storageObj);
+			// Connexion à socket.io
+            socket.emit('object', 'obj2',JSON.stringify(storageObj));
+		}
+		/*var func3=function(){
+			window["func"]
+		}*/
+
+	</script>
+	<script type="text/javascript" src="model.js"></script>
+	<script type="text/javascript" src="face_capture.js"></script>
+</body>
+</html>
